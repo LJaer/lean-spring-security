@@ -1,4 +1,4 @@
-package com.ljaer.security;
+package com.ljaer;
 
 import org.springframework.security.core.AuthenticationException;
 

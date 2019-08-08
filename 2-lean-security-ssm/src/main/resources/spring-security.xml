@@ -59,15 +59,15 @@
 
 
     <bean id="myUserDetailSerivce"
-          class="com.ljaer.security.MyUserDetailService"/>
+          class="com.ljaer.MyUserDetailService"/>
 
     <bean id="myAuthenticationnSuccessHandler"
-          class="com.ljaer.security.MyAuthenticationSuccessHandler"/>
+          class="com.ljaer.MyAuthenticationSuccessHandler"/>
     <bean id="myAuthenticationFailureHandler"
-          class="com.ljaer.security.MyAuthenticationFailureHandler"/>
+          class="com.ljaer.MyAuthenticationFailureHandler"/>
 
     <bean id="imageCodeAuthenticationFilter"
-    class="com.ljaer.security.ImageCodeAuthenticationFilter">
+    class="com.ljaer.ImageCodeAuthenticationFilter">
         <property name="authenticationFailureHandler" ref="myAuthenticationFailureHandler"/>
     </bean>
 

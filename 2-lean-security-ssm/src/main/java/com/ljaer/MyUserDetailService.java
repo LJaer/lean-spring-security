@@ -1,4 +1,4 @@
-package com.ljaer.security;
+package com.ljaer;
 
 
 import com.ljaer.domain.Permission;
