@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljaer.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="PermissionMap" type="com.ljaer.domain.Permission">
+        <result column="id" property="id"/>
+        <result column="perm_name" property="permName"/>
+        <result column="perm_tag" property="permTag"/>
+    </resultMap>
+
+    <resultMap id="UserMap" type="com.ljaer.domain.User">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="realname" property="realname"/>
+        <result column="password" property="password"/>
+        <result column="create_date" property="createDate"/>
+        <result column="last_login_time" property="lastLoginTime"/>
+        <result column="enabled" property="enabled"/>
+        <result column="account_non_expired" property="accountNonExpired"/>
+        <result column="account_non_locked" property="accountNonLocked"/>
+        <result column="credentials_non_expired" property="credentialsNonExpired"/>
+    </resultMap>
+
+    <!-- 查询用户 -->
+    <select id="findByUsername" parameterType="string" resultMap="UserMap">
+        select * from sys_user where username = #{value}
+    </select>
+
+    <!-- 查询用户的权限 -->
+    <select id="findPermissionByUsername" parameterType="string" resultMap="PermissionMap">
+        select permission.*
+           from
+             sys_user user
+             inner join sys_user_role user_role on user.id = user_role.user_id
+             inner join sys_role_permission role_permission on user_role.role_id = role_permission.role_id
+             inner join sys_permission permission on role_permission.perm_id = permission.id
+             where user.username = #{value};
+    </select>
+
+    <update id="updatePassword" parameterType="user">
+        update sys_user set password = #{password} where username = #{username}
+    </update>
+
+</mapper>
